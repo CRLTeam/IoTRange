@@ -21,12 +21,8 @@ To summarize the Alice and Bob example: I changed the numbers in their respectiv
 As the attacker, I’ll use ARP Poisoning to tell the Controller and the Door Lock that I am in fact, the Controller and Door Lock. All their traffic will pass through me. Similarly, with a cloud connected IoT device you could ARP Poison between the IoT Device and the Router. I will then use Wireshark to capture and search through the packets sent between the devices, looking for a REST call or other traffic that may identify a Unlock Door signal. In this case, I will search Wireshark for a POST REST call, construct the original REST call from the information, and replay it to unlock the door. 
 
 ## System Architecture
-![Screenshot] (/images/MITM Replay Attack/image1.png)
-https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image1.png
-![Alt text](/images/MITM Replay Attack/image1.jpg?raw=true "Optional Title")
 
-![Alt text](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image1.png?raw=true "Optional Title")
-![Alt text](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image1.png)
+![Alt text](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image18.png?raw=true)
 
 ### Normal Behavior of Door Lock System
 
