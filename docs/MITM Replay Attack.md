@@ -22,6 +22,10 @@ As the attacker, I’ll use ARP Poisoning to tell the Controller and the Door Lo
 
 ## System Architecture
 ![Screenshot] (/images/MITM Replay Attack/image1.png)
+
+![Alt text](/images/MITM Replay Attack/image1.jpg?raw=true "Optional Title")
+
+
 ### Normal Behavior of Door Lock System
 
 End user swipes card on the Card Reader. Card Reader communicates with Controller through the network with card details. If it matches the database, Controller sends unlock command to Door Lock. 
