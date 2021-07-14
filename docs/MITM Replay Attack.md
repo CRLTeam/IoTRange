@@ -91,7 +91,7 @@ Update your Kali installation:
 
 `sudo apt update`
 `sudo apt upgrade -y`
-Identify Devices
+## Identify Devices
 To identify devices on the network, we will do a port scan using nmap.
 
 Open a terminal (keyboard shortcut CTRL+ALT+T) and enter the following:
