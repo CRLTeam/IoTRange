@@ -100,12 +100,13 @@ Open a terminal (keyboard shortcut CTRL+ALT+T) and enter the following:
 
 You may need to change the IP address depending on your network. The * indicates a wildcard, i.e. it will scan the entire 192.168.1.0/24 subnet.
 
-
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image15.png?raw=true)
 
 While the nmap scan will not give us ‘friendly hostnames’ for example, if you named your macbook “Toms Macbook” but it will give us manufacturer information.
 
 
 As we are running our IoT devices as raspberry pi, we can see that the raspberry pi’s are the devices we wish to target.
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image14.png?raw=true)
 
 ## Set up Man In The Middle with Ettercap
 
@@ -117,9 +118,11 @@ command to run:
 
 Note: Keep the Ettercap terminal window open while running Ettercap.
 If you need an additional terminal window you can open a new tab like this:
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image12.png?raw=true)
 
 
 Below is the initial screen of Ettercap:
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image21.png?raw=true)
 
 
 Ettercap can use a single network interface (unified mode) or two network interfaces (bridged mode).
@@ -129,21 +132,25 @@ Unified mode means Ettercap uses a single network interface for sending/receivin
 Bridge mode means Ettercap is using two bridged network interfaces, one connecting to the client and one connecting to the server, and is sniffing traffic crossing that bridge.
 
 For our uses, and most uses, we will want to use Unified mode.
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image10.png?raw=true)
 
 
 
 Click the checkmark highlighted in Red to continue.
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image1.png?raw=true)
 
 
 First click the **Magnifying Glass** highlighted in Red. This will scan for hosts within the subnet.
 
 You will get a message in the bottom similar to:
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image16.png?raw=true)
 
 
 Next, click the other object that looks like a **Server Stack**, highlighted in Red. This will open up the list of hosts on your network. 
 
 If you do not see the host you expect, press the **Scan for Hosts Magnifying Glass** again. 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image3.png?raw=true)
 
 
 
@@ -152,6 +159,7 @@ On my second scan it picked up a host it missed on the initial scan.
 
 
 After clicking on the **Server Rack icon**, you will see the Hosts List.
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image13.png?raw=true)
 
 ### Targets
 
@@ -167,16 +175,20 @@ We will add the **Door Lock** at IP **192.168.1.70** to target 1
 
 We will add the **IoT Controller** at IP **192.168.1.72** to target 2
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image8.png?raw=true)
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image2.png?raw=true)
 
 
 
 Click the **Globe Icon** to open the **MITM Menu**. You can also **stop** the MITM attack using the **Stop button** to the right of it.
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image9.png?raw=true)
 
 
 In the MITM Menu, select the first option, ARP Poisoning.
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image17.png?raw=true)
 
 
 ### Optional Parameters Explained:
@@ -198,12 +210,14 @@ this is helpful to evade detection in case there is an ARP watcher at the router
 
 Wireshark is a network packet capture tool. We will use this tool to capture the traffic we are directing through our computer using our ARP Poisoning MITM attack. Because we are sitting in the middle, we can see all traffic between the two computers - and sometimes web activity too, depending on our settings.
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image20.png?raw=true)
 
 
 Click the Kali Application Menu icon at the Top Left of your screen, and search for Wireshark.
 You may need to enter your admin password (default password:kali)
 
 Within Wireshark, press the **Blue Shark Fin button** to start capturing your packets.
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image19.png?raw=true)
 
 Press the **Stop button** to the right of your Capture button to stop captures.
 
@@ -212,24 +226,30 @@ Press the **Stop button** to the right of your Capture button to stop captures.
 To find the traffic that opened the door lock, we will search through the packets.
 
 To use the search tool, on the top menu use Edit > Find Packet.
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image4.png?raw=true)
 
 We can try searching for POST, if we believe that the Controller is using a REST call to activate the door lock. Otherwise, we can simply search for lock and see what comes up in the traffic.
 
 In the search area that has appeared, we will want to search for Packet Details, and search for a String.
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image7.png?raw=true)
+
 
 The search bar highlights in green when a match is found.
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image11.png?raw=true)
 
 
 Within the captured packets, we can see the POST call to the Door Lock from the Controller, and below it we can see the ACK (acknowledge) response from the door lock.
 
 Once we look in the section below where the Packet Details are, we can see the full request URL.
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image5.png?raw=true)
 
 
 Above in the captured packets list, if we click on the captured packet in question, we can also see the Open command and the Length (number of times it will open).
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image6.png?raw=true)
 
 
 ### Reconstructing The Door Lock Command
