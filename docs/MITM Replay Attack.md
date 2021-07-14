@@ -22,7 +22,7 @@ As the attacker, I’ll use ARP Poisoning to tell the Controller and the Door Lo
 
 ## System Architecture
 
-![Alt text](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image18.png?raw=true)
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/MITM%20Replay%20Attack/image18.png?raw=true)
 
 ### Normal Behavior of Door Lock System
 
