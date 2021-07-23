@@ -11,6 +11,7 @@ WIFI Brute Force/Dictionary Attack
 # Description
 
 ## WPA/WPA2 4 Way Handshake
+![Screenshot](https://github.com/CRLTeam/IoTRange/blob/main/images/WIFI%20Cracking/image11.png?raw=true)
 
 WPA2 has three main key types:
 
